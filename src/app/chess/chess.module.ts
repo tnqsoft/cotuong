@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChessComponent } from './chess.component';
-import { BoardComponent } from './board/board.component';
 
 @NgModule({
   imports: [
@@ -9,7 +8,6 @@ import { BoardComponent } from './board/board.component';
   ],
   declarations: [
     ChessComponent,
-    BoardComponent
   ],
   exports: [
     ChessComponent,
