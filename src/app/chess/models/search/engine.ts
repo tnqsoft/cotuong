@@ -1,18 +1,20 @@
 import { Piece } from '../pieces/piece';
 import { Point } from '../point';
 
-export class SearchEngine {
+export abstract class Engine {
     public currentMap: Array<any>;
     public searchDepth: number;
     public evaluator: null;
     public moveGen: null;
     public bestMove: null;
+    public maxDepth: number;
 
     constructor() {
         this.searchDepth = 3;
         this.evaluator = null;
         this.moveGen = null;
         this.bestMove = null;
+        this.maxDepth = null;
 
         this.currentMap = new Array();
         for (let i = 0; i < 9; ++i) {
@@ -23,7 +25,7 @@ export class SearchEngine {
         }
     }
 
-    searchAGoodMove(): void {}
+    abstract searchAGoodMove();
 
     setSearchDepth(depth: number): void {
         this.searchDepth = depth;
@@ -69,9 +71,9 @@ export class SearchEngine {
         }
     }
 
-    isGameOver(map, depth) {
+    isGameOver(map, depth): number {
         let red = false,
-            black = false;
+            black: any = false;
         for (let j = 7; j < 10; ++j) {
             for (let i = 3; i < 6; ++i) {
                 if (map[i][j] != null) {
@@ -96,8 +98,7 @@ export class SearchEngine {
                 }
             }
         }
-        let isBlackTurn = (this.searchDepth - depth + 1) % 2;
-        // 自己回合的胜局，正无穷，否则，负无穷。
+        let isBlackTurn: number = (this.maxDepth - depth + 1) % 2;
         return (red && black) ? 0 : (black ^ isBlackTurn ? -1 : 1) * (19990 + depth);
     }
 }
