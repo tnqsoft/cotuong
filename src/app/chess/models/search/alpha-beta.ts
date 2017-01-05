@@ -10,15 +10,15 @@ export class AlphaBeta extends Engine {
     }
 
     alphabeta(depth, alpha, beta) {
-        var score = this.isGameOver(this.currentMap, depth);
+        let score = this.isGameOver(this.currentMap, depth);
         if (score != 0) return score;
         if (depth <= 0)
             return this.evaluator.evaluate(this.currentMap, (this.maxDepth - depth) % 2);
 
-        var count = this.moveGen.createPossibleMove(this.currentMap, depth, (this.maxDepth - depth) % 2);
+        let count = this.moveGen.createPossibleMove(this.currentMap, depth, (this.maxDepth - depth) % 2);
 
-        for (var i = 0; i < count; i++) {
-            var chess = this.makeMove(this.moveGen.moveList[depth][i]);
+        for (let i = 0; i < count; i++) {
+            let chess = this.makeMove(this.moveGen.moveList[depth][i]);
             score = -this.alphabeta(depth - 1, -beta, -alpha);
             this.unMakeMove(this.moveGen.moveList[depth][i], chess);
 

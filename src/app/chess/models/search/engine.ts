@@ -25,7 +25,7 @@ export abstract class Engine {
         }
     }
 
-    abstract searchAGoodMove();
+    abstract searchAGoodMove(map);
 
     setSearchDepth(depth: number): void {
         this.searchDepth = depth;
